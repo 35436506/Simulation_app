@@ -97,19 +97,38 @@ def plot_histogram(data, title, xlabel, color="#38bdf8", percentile_lines=None, 
         name="Normal fit", line=dict(color="#f59e0b", width=2, dash="dash")
     ))
     if percentile_lines:
-        for p, label in percentile_lines:
+        # Stagger annotation y positions to avoid overlap
+        y_offsets = [0.98, 0.82, 0.66]
+        for i, (p, label) in enumerate(percentile_lines):
             val = np.percentile(data, p)
-            fig.add_vline(x=val, line_width=1.5, line_dash="dot", line_color="#a78bfa",
-                          annotation_text=f"P{p}: {val:,.0f}", annotation_position="top right")
+            yref_pos = y_offsets[i] if i < len(y_offsets) else 0.98 - i * 0.16
+            fig.add_vline(
+                x=val, line_width=1.5, line_dash="dot", line_color="#a78bfa",
+                annotation=dict(
+                    text=f"P{p}: {val:,.0f}",
+                    yref="paper", y=yref_pos,
+                    font=dict(size=11, color="#a78bfa"),
+                    bgcolor="rgba(15,23,42,0.7)",
+                    borderpad=3,
+                    xanchor="left",
+                )
+            )
     if target is not None:
         fig.add_vline(x=target, line_width=2, line_color="#ef4444",
-                      annotation_text=f"Target: {target:,.0f}", annotation_position="top left")
+                      annotation=dict(
+                          text=f"Target: {target:,.0f}",
+                          yref="paper", y=0.98,
+                          font=dict(size=11, color="#ef4444"),
+                          bgcolor="rgba(15,23,42,0.7)",
+                          borderpad=3,
+                          xanchor="right",
+                      ))
     fig.update_layout(
         title=dict(text=title, y=0.97, yanchor="top"),
         xaxis_title=xlabel, yaxis_title="Density",
-        template="plotly_dark", height=380,
-        margin=dict(l=40, r=40, t=80, b=40),
-        legend=dict(orientation="h", yanchor="top", y=-0.15, xanchor="center", x=0.5),
+        template="plotly_dark", height=400,
+        margin=dict(l=40, r=40, t=60, b=70),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.22, xanchor="center", x=0.5),
     )
     return fig
 
