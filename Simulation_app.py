@@ -60,8 +60,6 @@ st.markdown("""
 [data-testid="stSidebar"] .stButton > button:hover {
     opacity: 0.88 !important;
 }
-</style>
-"""
 
 .metric-card {
     background: #1e293b;
