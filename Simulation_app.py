@@ -18,13 +18,50 @@ st.markdown("""
 <style>
 [data-testid="stSidebar"] { background: #0f172a; }
 [data-testid="stSidebar"] * { color: #e2e8f0 !important; }
+
+/* Labels */
 [data-testid="stSidebar"] .stSelectbox label,
 [data-testid="stSidebar"] .stNumberInput label,
-[data-testid="stSidebar"] .stSlider label { color: #94a3b8 !important; }
-[data-testid="stSidebar"] input[type="number"],
-[data-testid="stSidebar"] input[type="text"] { color: #111827 !important; background: #f8fafc !important; }
-[data-testid="stSidebar"] .stNumberInput input,
-[data-testid="stSidebar"] .stTextInput input { color: #111827 !important; }
+[data-testid="stSidebar"] .stSlider label,
+[data-testid="stSidebar"] .stTextInput label,
+[data-testid="stSidebar"] .stCheckbox label { color: #94a3b8 !important; }
+
+/* All input fields — dark text on light background */
+[data-testid="stSidebar"] input {
+    color: #111827 !important;
+    background-color: #f8fafc !important;
+    -webkit-text-fill-color: #111827 !important;
+}
+[data-testid="stSidebar"] input::placeholder {
+    color: #6b7280 !important;
+    -webkit-text-fill-color: #6b7280 !important;
+}
+
+/* Selectbox displayed value */
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] [class*="ValueContainer"],
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] span,
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] div {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
+    background-color: #f8fafc !important;
+}
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] {
+    background-color: #f8fafc !important;
+}
+
+/* Button text white on gradient */
+[data-testid="stSidebar"] .stButton > button {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: linear-gradient(135deg, #0ea5e9, #6366f1) !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+    opacity: 0.88 !important;
+}
+</style>
+"""
 
 .metric-card {
     background: #1e293b;
@@ -127,8 +164,8 @@ def plot_histogram(data, title, xlabel, color="#38bdf8", percentile_lines=None, 
         title=dict(text=title, y=0.97, yanchor="top"),
         xaxis_title=xlabel, yaxis_title="Density",
         template="plotly_dark", height=400,
-        margin=dict(l=40, r=40, t=60, b=70),
-        legend=dict(orientation="h", yanchor="bottom", y=-0.22, xanchor="center", x=0.5),
+        margin=dict(l=40, r=40, t=60, b=90),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.32, xanchor="center", x=0.5),
     )
     return fig
 
