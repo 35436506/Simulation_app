@@ -21,6 +21,10 @@ st.markdown("""
 [data-testid="stSidebar"] .stSelectbox label,
 [data-testid="stSidebar"] .stNumberInput label,
 [data-testid="stSidebar"] .stSlider label { color: #94a3b8 !important; }
+[data-testid="stSidebar"] input[type="number"],
+[data-testid="stSidebar"] input[type="text"] { color: #111827 !important; background: #f8fafc !important; }
+[data-testid="stSidebar"] .stNumberInput input,
+[data-testid="stSidebar"] .stTextInput input { color: #111827 !important; }
 
 .metric-card {
     background: #1e293b;
@@ -101,10 +105,11 @@ def plot_histogram(data, title, xlabel, color="#38bdf8", percentile_lines=None, 
         fig.add_vline(x=target, line_width=2, line_color="#ef4444",
                       annotation_text=f"Target: {target:,.0f}", annotation_position="top left")
     fig.update_layout(
-        title=title, xaxis_title=xlabel, yaxis_title="Density",
+        title=dict(text=title, y=0.97, yanchor="top"),
+        xaxis_title=xlabel, yaxis_title="Density",
         template="plotly_dark", height=380,
-        margin=dict(l=40, r=40, t=50, b=40),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02),
+        margin=dict(l=40, r=40, t=80, b=40),
+        legend=dict(orientation="h", yanchor="top", y=-0.15, xanchor="center", x=0.5),
     )
     return fig
 
